@@ -1,0 +1,156 @@
+/* ADMIN PAGE */
+td, th {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  margin: auto;
+  margin-top: 30px;
+  padding: 15px;
+}
+
+table {
+  border-spacing: 0;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: auto;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.control-btn {
+  padding: 5px;
+  font-family: 'Poppins';
+  border: 0;
+  margin-bottom: 10px;
+  background-color: #1FBF84;
+  border-radius: 4px;
+  color: white;
+  display: flex;
+  width: 95px;
+  justify-content: center;
+}
+
+.control-btn:hover {
+  background-color: rgba(31, 191, 132, 0.7);
+}
+
+#delete-btn {
+  background-color: #F24141;
+}
+
+#delete-btn:hover {
+  background-color: rgba(242, 65, 65, 0.7);
+}
+
+#reject-btn {
+  background-color: rgb(180, 180, 50);
+}
+
+#reject-btn:hover {
+  background-color: rgba(180, 180, 50, 0.7);
+}
+
+#unreview-btn {
+  background-color: rgb(128, 128, 128);
+  margin-bottom: 0;
+}
+
+#unreview-btn:hover {
+  background-color: rgb(128, 128, 128, 0.7);
+}
+
+.admin-container {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  letter-spacing: 2px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.admin-table-container {
+  margin: auto;
+  margin-top: 30px;
+  width: 1400px;
+  padding: 10px;
+  padding-top: 1px;
+  box-shadow: 0px 5px 20px 10px rgba(0, 0, 0, 0.1);
+}
+
+.read-more-btn {
+  color: black;
+  border: 0;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-family: 'Poppins';
+  letter-spacing: 2px;
+  padding: 0;
+  display: flex;
+  text-shadow: 0px 3px 10px;
+}
+
+.read-more-btn:hover {
+  color: rgba(0, 0, 0, .5)
+}
+
+#readMorePanel {
+  background-color: white;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 5px;
+  top: 50%;
+  left: 50%;
+  width: 50em;
+  height: 30em;
+  margin-top: -15em;
+  margin-left: -25em;
+  position: fixed;
+  overflow: auto;
+  box-shadow: 0px 5px 20px 10px rgba(0, 0, 0, 0.1);
+}
+
+#read-more-box {
+  margin: 0;
+  text-align: justify;
+}
+
+.close-more-reason-btn {
+  border: 0;
+  background-color: transparent;
+  font-family: 'Poppins';
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.view-dropdown-menu, .sort-dropdown-menu{
+  font-family: 'Poppins';
+  letter-spacing: 2px;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.view-dropdown-menu:hover {
+  padding: 3px;
+  margin-left: 3.5px;
+  margin-right: 10.5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.sort-dropdown-menu:hover {
+  padding: 3px;
+  margin-left: 3.5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.dropdown-menu-container {
+  margin-top: 10px;
+}
+
+.approval-state {
+  color: rgba(0, 0, 0, 0.8);
+}

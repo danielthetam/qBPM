@@ -1,0 +1,88 @@
+.home-container {
+    width: 100%;
+    height: 100%;
+    background-color: #005c73;
+    display: flex;
+}
+
+.home-title {
+    width: 100%;
+}
+
+.home-title h1 {
+    font-size: 500px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    z-index: 0;
+    color: rgba(0, 0, 0, 0.1);
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    user-select: none;
+}
+
+@keyframes moveUp {
+    from {
+        opacity: 0;
+        margin-top: -30em;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.home-title {
+    z-index: 1;
+    animation-name: moveUp;
+    animation-duration: 3s;
+}
+
+.home-title h2, .home-title h3{
+    margin-top: -2.5em;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-shadow: 0px 10px 10px rgba(0, 0, 0, .3);
+    text-transform: lowercase;
+}
+
+.home-title h2 {
+    font-size: 200px;
+    color: rgb(0, 190, 241);
+    text-shadow: 0px 10px 3px rgba(0, 0, 0, .9);
+}
+
+.home-title h3 {
+    margin-top: -5em;
+    color: rgba(0, 190, 241, .5);
+    font-size: 30px;
+}
+.home-cover {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+}
+
+.home-menu-container {
+    background-color: #0097bf;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, .5);
+    width: fit-content;
+    height: 100%;
+    z-index: 1;
+}
+
+.home-menu-container button {
+    display: block;
+    background-color: transparent;
+    border: none;
+    border-radius: 3px;;
+    padding: 10px;
+    margin: 1px;
+    margin-left: 0;
+    margin-top: 0;
+}
+
+.home-menu-container button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}

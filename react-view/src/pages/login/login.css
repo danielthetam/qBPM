@@ -1,0 +1,124 @@
+.login-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.login-description {
+    width: 200px;
+}
+
+.login-left-block, .login-right-block {
+    background-color: white;
+    width: 80%;
+    z-index: 1;
+}
+
+.login-container input {
+    color: black;
+}
+
+.login-form-container {
+    border-radius: 10px;
+    padding: 100px;
+    margin: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 30%;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.login-form-container form {
+    display: flex;
+}
+
+@keyframes rightSlide {
+    from {left: -100em;}
+}
+@keyframes leftSlide {
+    from {}
+    to {left: -80em;}
+}
+
+@keyframes leftSlide2 {
+    from {}
+    to {left: 0em;}
+}
+
+.login-form-container input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    width: 200px;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-left: auto;
+}
+
+.login-form-container input[type="text"] {
+    animation-name: rightSlide;
+    animation-duration: 1.5s;
+}
+
+.login-form-container input[type="password"] {
+    left: 50em;
+}
+
+.login-form-container button {
+    margin-top: 80px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px;
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins';
+    letter-spacing: 2px;
+}
+
+.login-form-container button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pointerMove {
+    30% {
+        right: 25.8em;
+    }
+    40% {
+        right: 26.2em;
+    }
+    50% {
+        right: 25.8em;
+    }
+    60% {
+        right: 26.2em;
+    }
+    70% {
+        right: 25.8em;
+    }
+    80% {
+        right: 26.2em;
+    }
+    100% {
+        right: 10em;
+    }
+}
+
+#login-pointer {
+    color: rgba(255, 0, 0, 0.5);
+    right: 100em;
+    position: absolute;
+    margin-top: 7px;
+}
+
+.login-form-title {
+    font-size: 30px;
+    text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+    color: #00BEF1;
+}

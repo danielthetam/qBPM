@@ -1,0 +1,23 @@
+body {
+  font-family: 'Poppins';
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.root {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.bigboi {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
