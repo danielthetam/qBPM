@@ -2,8 +2,6 @@ package com.daniel.qbpm.jbpmrp;
 
 
 import com.daniel.qbpm.qBPMApplication;
-import com.daniel.qbpm.requests.Request;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.thoughtworks.xstream.core.util.Base64Encoder;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +13,10 @@ import java.util.*;
 @CrossOrigin(origins="http://localhost:3000/")
 @RestController
 @RequestMapping("/proxy")
+// Acts as a proxy between client and jBPM server
 public class JBPMRequestProxy {
+
+    // Returns group list from jbpm
     @GetMapping("/groups")
     public ResponseEntity<List<String>> getDepartmentList() {
         // Instantiating RestTemplate and headers

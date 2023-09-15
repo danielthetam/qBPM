@@ -9,20 +9,20 @@ function redirect(url, safe) {
 function Menu() {
     return (
         <div className='home-menu-container'>
-            <button title="Home" onClick={() => redirect("/")} className='home-homebtn'> {/* TODO redirect to proper home url*/}
+              <button title="Home" onClick={() => redirect("/")} className='home-homebtn'>
             <i className="material-icons">home</i>
             </button>
             <button title="Your Tasks" className='home-tasksbtn' onClick={() => redirect("/tasks")}>
-            <i className="material-icons">task</i>
+              <i className="material-icons">task</i>
             </button>
             <button title="Work From Home Request Portal" onClick={() => redirect("/wfh-form")} className='home-wfhpbtn'>
-            <i className="material-icons">work</i>
+              <i className="material-icons">work</i>
             </button>
-            <button title="Your Profile" className='home-profilebtn'>
-            <i className="material-icons">person</i>
+            <button onClick={() => redirect("/employees/" + sessionStorage.getItem("eid"))} title="Your Profile" className='home-profilebtn'>
+              <i className="material-icons">person</i>
             </button>
             <button title="Our Employees" className='home-employeesbtn'>
-            <i className="material-icons">people</i>
+              <i className="material-icons">people</i>
             </button>
             {sessionStorage.getItem("admin") == "true" ?
               <button onClick={() => redirect("/registry")} title="Registry" className='home-registrybtn'>

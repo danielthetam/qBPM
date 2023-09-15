@@ -32,7 +32,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-    @Autowired // What
+    @Autowired
     EmployeeRepository employeeRepository;
     Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
