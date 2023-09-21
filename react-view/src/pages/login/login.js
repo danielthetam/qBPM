@@ -58,7 +58,7 @@ function Login() {
       var newNode = document.getElementById("login-pointer").cloneNode();
 
       newNode.innerHTML = "swipe_left_alt";
-      el.parentNode.replaceChild(newNode, document.getElementById("login-pointer")); // replae the pointer element with a clone to restart animation
+      el.parentNode.replaceChild(newNode, document.getElementById("login-pointer")); // replace the pointer element with a clone to restart animation
       document.getElementById("login-pointer").style.animationName = "pointerMove";
       document.getElementById("login-pointer").style.animationDuration = "3s";
     }

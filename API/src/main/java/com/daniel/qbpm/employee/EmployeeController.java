@@ -94,12 +94,12 @@ public class EmployeeController {
                     employeeBody.put("photo", imageData);
 
                     _employees.add(employeeBody);
-                    return new ResponseEntity<>(_employees, HttpStatus.OK);
                 } catch (Exception e) {
                     logger.error(e.toString());
                 }
             }
-        } else {
+            return new ResponseEntity<>(_employees, HttpStatus.OK);
+        } else if (employeeEid != null) {
             Employee employee = employeeRepository.findByEid(employeeEid);
             String imageData = DatatypeConverter.printBase64Binary(employee.getPhoto());
 
@@ -165,6 +165,10 @@ public class EmployeeController {
                 String obj = departmentListObjs.get(i).toString();
                 departmentList.add(obj);
                 departmentStringArray[i] = obj;
+            }
+            // If employee database is empty, this user must be admin
+            if (employeeRepository.count() == 0) {
+                employee.put("admin", true);
             }
 
             // Save obj to database
@@ -242,6 +246,96 @@ public class EmployeeController {
         }
     }
 
+    @DeleteMapping("/employees")
+    public ResponseEntity<Object> deleteEmployee(@RequestParam long employeeEid) {
+        try {
+            Employee employee = employeeRepository.findByEid(employeeEid);
+            employeeRepository.deleteById(employee.getId());
+
+            RestTemplate restTemplate = new RestTemplate();
+            Base64Encoder encoder = new Base64Encoder();
+            String authorization = "Basic " + encoder.encode((qBPMApplication.ADMIN_USER + ":" + qBPMApplication.ADMIN_PASSWORD).getBytes(StandardCharsets.UTF_8));
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", authorization);
+            headers.set("Content-Type", "application/json");
+            headers.set("Accept", "application/json");
+
+            String URL = qBPMApplication.BASE_BC_URI + "/users/" + String.valueOf(employeeEid);
+
+            HttpEntity<String> httpEntity = new HttpEntity<>("", headers);
+            ResponseEntity<String> result = restTemplate.exchange(URL, HttpMethod.DELETE, httpEntity, String.class);
+
+            logger.info(result.toString());
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/employees")
+    public ResponseEntity<Object> editEmployee(@RequestBody Map<String, Object> body) {
+        try {
+            long eid = Integer.parseInt((String) body.get("eid"));
+            Employee employee = employeeRepository.findByEid(eid);
+            employee.setAdmin((Boolean) body.get("admin"));
+            employee.setDatejoined((Integer) body.get("datejoined"));
+            employee.setEmail((String) body.get("email"));
+            Base64Encoder encoder = new Base64Encoder();
+            // byte[] byteData = encoder.decode((String)body.get("photo"));
+            // employee.setPhoto((byte[]) byteData);
+            employee.setName((String) body.get("name"));
+            employee.setRole((String) body.get("role"));
+
+            List<Object> departmentListObjs = (ArrayList<Object>) body.get("department"); // json array comes as arraylist of objects, so we convert it
+            List<String> departmentList = new ArrayList<String>(); // api body parameter only accepts
+            String[] departmentStringArray = new String[departmentListObjs.size()]; // to save employee field as array
+            for (int i=0; i<departmentListObjs.size(); i++) {
+                String obj = departmentListObjs.get(i).toString();
+                departmentList.add(obj);
+                departmentStringArray[i] = obj;
+            }
+
+            employee.setDepartment(departmentStringArray);
+            employeeRepository.save(employee);
+
+            // Instantiating RestTemplate and headers
+            RestTemplate restTemplate = new RestTemplate();
+
+            String authorization = "Basic " + encoder.encode((qBPMApplication.ADMIN_USER + ":" + qBPMApplication.ADMIN_PASSWORD).getBytes(StandardCharsets.UTF_8));
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", authorization);
+            headers.set("Content-Type", "application/json");
+            headers.set("Accept", "application/json");
+
+            // Assigning user role
+            String URL = qBPMApplication.BASE_BC_URI + "/users/" + employee.getEid() + "/roles";
+            List<String> roleBody = new ArrayList<String>();
+            roleBody.add("user");
+
+            // if employee is admin, assign admin
+            if ((boolean) body.get("admin")) {
+                roleBody.add("admin");
+            }
+
+            HttpEntity<List<String>> roleHttpEntity = new HttpEntity<>(roleBody, headers);
+            ResponseEntity<String> result = restTemplate.exchange(URL, HttpMethod.POST, roleHttpEntity, String.class);
+            logger.info(result.toString());
+
+            // Assigning groups
+            URL = qBPMApplication.BASE_BC_URI + "/users/" + employee.getEid() + "/groups";
+
+            HttpEntity<List<String>> groupHttpEntity = new HttpEntity<>(departmentList, headers);
+            result = restTemplate.exchange(URL, HttpMethod.POST, groupHttpEntity, String.class);
+            logger.info(result.toString());
+
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     /**
      * Returns a boolean dictating whether eid exists and the password matches it.
      * <p>
@@ -252,7 +346,7 @@ public class EmployeeController {
      * Body: Map containing {@code eid, password}
      */
     @PostMapping("/login")
-    public ResponseEntity<Boolean> loginTest(@RequestBody Map<String, String> body) {
+    public ResponseEntity<Object> loginTest(@RequestBody Map<String, String> body) {
         try {
             String password = body.get("password");
             long eid = Integer.parseInt(body.get("eid"));

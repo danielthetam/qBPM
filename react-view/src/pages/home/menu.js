@@ -21,7 +21,7 @@ function Menu() {
             <button onClick={() => redirect("/employees/" + sessionStorage.getItem("eid"))} title="Your Profile" className='home-profilebtn'>
               <i className="material-icons">person</i>
             </button>
-            <button title="Our Employees" className='home-employeesbtn'>
+            <button onClick={() => redirect("/employees")} title="Our Employees" className='home-employeesbtn'>
               <i className="material-icons">people</i>
             </button>
             {sessionStorage.getItem("admin") == "true" ?

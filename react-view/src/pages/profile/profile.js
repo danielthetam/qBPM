@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './profile.css';
-import {API_URL} from '../../index.js';
+import {API_URL, dateToString} from '../../index.js';
 
 function Profile({profileEid}) {
     const [profileDetails, setProfileDetails] = React.useState({})
@@ -44,12 +44,15 @@ function Profile({profileEid}) {
                     </div>
                     <div className="profile-detail-container">
                         <label>Onboarding Date: </label>
-                        <p>{profileDetails["datejoined"]}</p>
+                        <p>{dateToString(parseInt(profileDetails["datejoined"]))}</p>
                     </div>
                     <div className="profile-detail-container">
                         <label>Is Admin: </label>
                         <p>{profileDetails["isAdmin"]}</p>
                     </div>
+                    {sessionStorage.getItem("admin") == "true" ?
+                    <input type="button" value="Edit" onClick={() => {window.location.href = "/employee-edit/"+profileEid}}></input>: <div></div>
+                    }
                 </div>
             </div>
         </div>

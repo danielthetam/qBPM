@@ -12,11 +12,11 @@
 
 .profile-card {
     width: 400px;
-    height: 600px;
+    height: 650px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
     border-radius: 10px;
     margin: auto;
-    margin-top: 5.5%;
+    margin-top: 3.5%;
     padding: 15px;
 }
 
@@ -42,4 +42,15 @@
     border-radius: 5px;
     margin: 0;
     margin-bottom: 5px;
+}
+
+.profile-container input[type="button"] {
+    color: black;
+    background-color: rgba(0, 0, 0, .1);
+    border: none;
+    border-radius: 3px;
+}
+
+.profile-container input[type="button"]:hover {
+    background-color: rgba(0, 0, 0, .3);
 }
