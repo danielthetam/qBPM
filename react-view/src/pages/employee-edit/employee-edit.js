@@ -141,7 +141,9 @@ function EmployeeEdit({employeeEid}) {
 
     axios.put(API_URL + "/employee/employees", body).then((response) => {
     })
-    sessionStorage.setItem("admin", document.getElementById("isadmin").checked)
+    if (employeeEid == sessionStorage.getItem("eid")) {
+      sessionStorage.setItem("admin", document.getElementById("isadmin").checked)
+    }
 
     window.location.href = "/employees/" + employeeEid.toString()
   }
@@ -168,7 +170,7 @@ function EmployeeEdit({employeeEid}) {
 
     return (
       <div className="registry-page">
-        <form id="registry-main-form" onSubmit={(event) => onSubmit(event)}>
+        <form autoComplete="chrome-off" id="registry-main-form" onSubmit={(event) => onSubmit(event)}>
           <div className="registry-main-form-container">
             <div className="registry-basic-information">
               <div className="registry-title-container">
@@ -176,10 +178,10 @@ function EmployeeEdit({employeeEid}) {
               </div>
               <div className="registry-basic-information-content">
                 <label>Employee Name</label>
-                <input id="name" defaultValue={employeeDetails["name"]} type="text" required></input>
+                <input id="name" autoComplete="chrome-off" defaultValue={employeeDetails["name"]} type="text" required></input>
 
                 <label>Employee Email</label>
-                <input id="email" defaultValue={employeeDetails["email"]} type="email" required></input>
+                <input id="email" autoComplee="chrome-off" defaultValue={employeeDetails["email"]} type="email" required></input>
 
                 <label>Employee Role</label>
                 <input id="role" defaultValue={employeeDetails["role"]} type="text" required></input>
@@ -211,7 +213,15 @@ function EmployeeEdit({employeeEid}) {
               </form>
 
               <input className="registry-submit-btn" type='submit' value="Push Edits"></input> 
-              <input className="employeeEdit-delete-btn" onClick={() => {axios.delete(API_URL + "/employee/employees?employeeEid="+employeeEid); window.location.href="/employees"; if (employeeEid == sessionStorage.getItem("eid")) {sessionStorage.clear()}}} type='button' value="Delete"></input> 
+              <input className="employeeEdit-delete-btn" onClick={() => 
+                {
+                  axios.delete(API_URL + "/employee/employees?employeeEid="+employeeEid); 
+                  window.location.href="/employees"; 
+                  if (employeeEid == sessionStorage.getItem("eid")) {
+                    sessionStorage.clear()
+                  }
+                }
+              } type='button' value="Delete"></input> 
             </div>
 
           </div>

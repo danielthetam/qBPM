@@ -183,7 +183,7 @@ function Registry() {
   if (!displayPassword) {
     return (
       <div className="registry-page">
-        <form id="registry-main-form" onSubmit={(event) => onSubmit(event)}>
+        <form autoComplete="chrome-off" id="registry-main-form" onSubmit={(event) => onSubmit(event)}>
           <div className="registry-main-form-container">
             <div className="registry-basic-information">
               <div className="registry-title-container">
@@ -191,10 +191,10 @@ function Registry() {
               </div>
               <div className="registry-basic-information-content">
                 <label>Employee Name</label>
-                <input id="name" type="text" required></input>
+                <input autoComplete="chrome-off" id="name" type="text" required></input>
 
                 <label>Employee Email</label>
-                <input id="email" type="email" required></input>
+                <input autoComplete="chrome-off" id="email" type="email" required></input>
 
                 <label>Employee Role</label>
                 <input id="role" type="text" required></input>
